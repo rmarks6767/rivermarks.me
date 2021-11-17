@@ -1,5 +1,7 @@
+/* eslint-disable react/jsx-one-expression-per-line */
 import { Typography } from '@mui/material';
 import React, { useEffect, useRef, useState } from 'react';
+import Loremaster from '../Projects/Loremaster/Loremaster';
 import './Terminal.scss';
 
 const KEYS_TO_IGNORE = [
@@ -18,28 +20,16 @@ const KEYS_TO_IGNORE = [
   'F10',
   'F11',
   'F12',
-  'Control',
   'Escape',
   'ContextMenu',
-  'Tab',
 ];
 
 const DIRECTORIES = {
   '~': {
     Projects: {
-      'project-loremaster': (
-        <div>
-          {' '}
-          <img src="https://www.lcps.org/cms/lib/VA01000195/Centricity/Domain/29342/DnD%20logo.jpg" alt="Logo" />
-          <p>Project Loremaster is a </p>
-        </div>),
-      'mc-data-api': {
-
-      },
-      'minecraft-charity-stream': {
-
-      },
+      loremaster: <Loremaster />,
     },
+    Experience: {},
     About: {},
   },
 
@@ -48,17 +38,25 @@ const DIRECTORIES = {
 const Terminal = () => {
   const [currentDirectory, setCurrentDirectory] = useState('~');
   const [input, setInput] = useState('');
-  const [output, setOutput] = useState([]);
+  const [output, setOutput] = useState([
+    <div>
+      &nbsp;&nbsp;&nbsp;Welcome! If you have no idea what is going on with this box, press
+      the toggle in the upper right corner. Otherwise, type help to see a list of commands!
+      <hr />
+    </div>,
+  ]);
   const [commands, setCommands] = useState([]);
   const [currentCommand, setCurrentCommand] = useState(-1);
   const [isFocused, setIsFocused] = useState(true);
   const [listenerSet, setListenerSet] = useState(false);
+  const [controlPressed, setControlPressed] = useState(false);
 
   // References needed to access all the data in the event listener
   const currentDirectoryRef = useRef(currentDirectory);
   const inputRef = useRef(input);
   const commandsRef = useRef(commands);
   const currentCommandRef = useRef(currentCommand);
+  const controlPressedRef = useRef(controlPressed);
 
   const userCommands = {
     cd: {
@@ -66,9 +64,40 @@ const Terminal = () => {
       helpText: 'cd: no such file or directory',
       successHandler: (dir) => {
         if (dir) {
-          const newDir = `${currentDirectoryRef.current}/${dir}`;
-          setCurrentDirectory(newDir);
-          currentDirectoryRef.current = newDir;
+          // Handle moving up directories
+          if (dir === '..' || dir === '.') {
+            if (dir === '.' || currentDirectoryRef.current === '~') return;
+
+            const dirs = `${currentDirectoryRef.current}/${dir}`.split('/');
+            const newDir = dirs.splice(0, dirs.length - 2).join('/');
+
+            setCurrentDirectory(newDir);
+            currentDirectoryRef.current = newDir;
+
+            return;
+          }
+
+          // Handle moving into directories (and making sure they exist)
+          const [root, ...dirs] = `${currentDirectoryRef.current}/${dir}`.split('/');
+          let currentDir = DIRECTORIES[root];
+          let dirDNE = false;
+
+          dirs.forEach((d) => {
+            if (!dirDNE) {
+              if (!currentDir || !currentDir[d]) {
+                dirDNE = true;
+                currentDir = d;
+              } else currentDir = currentDir[d];
+            }
+          });
+
+          if (dirDNE) {
+            setOutput((o) => [...o, `${userCommands.cd.helpText}: ${currentDir}`]);
+          } else {
+            const newDir = `${currentDirectoryRef.current}/${dir}`;
+            setCurrentDirectory(newDir);
+            currentDirectoryRef.current = newDir;
+          }
         } else {
           setCurrentDirectory('~');
           currentDirectoryRef.current = '~';
@@ -94,9 +123,24 @@ const Terminal = () => {
         });
 
         if (!React.isValidElement(current)) {
-          setOutput((o) => [...o, Object.keys(current).join(' ')]);
+          // If each of the children of the current dir are react elements, we show them
+          let isReact = false;
+          const out = Object.keys(current).map((key) => {
+            if (React.isValidElement(current[key])) {
+              isReact = true;
+              return current[key];
+            }
+            return key;
+          });
+
+          setOutput((o) => [...o, (
+            <div>
+              {isReact
+                ? <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}>{out}</div>
+                : out.join(' ')}
+            </div>)]);
         } else {
-          setOutput((o) => [...o, current]);
+          setOutput((o) => [...o, <div>{current}</div>]);
         }
       },
     },
@@ -113,23 +157,39 @@ const Terminal = () => {
   };
 
   useEffect(() => {
-    const listener = (e) => {
-      // Arrow keys get previous commands
-      if (e.key === 'ArrowUp') {
-        // Get previous command
-        setCurrentCommand((c) => {
-          if (c === -1) return c;
+    const keyDownListener = (e) => {
+      if (e.key === ' ' || e.key === 'Tab') {
+        e.preventDefault();
+      }
 
-          return c - 1;
-        });
-      } else if (e.key === 'ArrowDown') {
-        // Get next command
-        setCurrentCommand((c) => {
-          if (c === -1) return c;
+      if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+        // TODO: Make this work, need to write it out
+        // const diff = e.key === 'ArrowUp' ? -1 : 1;
+        // const ccr = currentCommandRef.current;
+        // const cr = commandsRef.current;
 
-          return c + 1;
-        });
-        setInput();
+        // setCurrentCommand((c) => {
+        //   if (ccr + diff >= 0 && ccr + diff < cr.length) {
+        //     currentCommandRef.current = c + diff;
+
+        //     return c + diff;
+        //   }
+        //   return c;
+        // });
+        // setInput((i) => {
+        //   if (ccr + diff === cr.length) {
+        //     inputRef.current = '';
+        //     return '';
+        //   } if (ccr > 0) {
+        //     const { command: newInput } = cr[ccr + diff];
+        //     inputRef.current = newInput;
+
+        //     return newInput;
+        //   }
+        //   return i;
+        // });
+      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+        // TODO: Allow cursor movement in CLI
       } else if (e.key === 'Enter') {
         setCommands((c) => {
           const newCommands = [
@@ -162,7 +222,14 @@ const Terminal = () => {
 
           return newInput;
         });
+      } else if (e.key === 'Control') {
+        controlPressedRef.current = true;
+        setControlPressed(true);
+      } else if (e.key === 'Tab') {
+        // TODO: allow tab complete
       } else if (KEYS_TO_IGNORE.includes(e.key)) {
+        // ignore
+      } else if (controlPressedRef.current) {
         // ignore
       } else {
         setInput((i) => {
@@ -174,13 +241,33 @@ const Terminal = () => {
       }
     };
 
+    const keyUpListener = (e) => {
+      if (e.key === 'Control') {
+        controlPressedRef.current = false;
+        setControlPressed(false);
+      }
+    };
+
+    const pasteListener = (e) => {
+      setInput((i) => {
+        const newInput = i + e.clipboardData.getData('Text');
+        inputRef.current = newInput;
+
+        return newInput;
+      });
+    };
+
     if (isFocused) {
       if (!listenerSet) {
-        document.addEventListener('keydown', listener);
+        document.addEventListener('keydown', keyDownListener);
+        document.addEventListener('keyup', keyUpListener);
+        document.addEventListener('paste', pasteListener);
         setListenerSet(true);
       }
     } else if (listenerSet) {
-      document.removeEventListener('keydown', listener);
+      document.removeEventListener('keydown', keyDownListener);
+      document.removeEventListener('keyup', keyUpListener);
+      document.removeEventListener('paste', pasteListener);
       setListenerSet(false);
     }
   }, [isFocused, input, listenerSet]);
@@ -199,18 +286,22 @@ const Terminal = () => {
         </div>
       </div>
       <div className="content">
-        {output.map((o) => (
-          <Typography variant="h4">
+        {output.map((o, i) => (
+          // eslint-disable-next-line react/no-array-index-key
+          <Typography key={i} variant="h4">
             {o}
           </Typography>
         ))}
-        <Typography variant="h4">
-          rivermarks.me:
-          {currentDirectory}
-          $
-          {' '}
-          {input}
-        </Typography>
+        <div style={{ display: 'flex' }}>
+          <Typography variant="h4">
+            rivermarks.me:
+            {currentDirectory}
+            $
+            {' '}
+            {input}
+          </Typography>
+          <div className="cursor" />
+        </div>
       </div>
     </div>
   );

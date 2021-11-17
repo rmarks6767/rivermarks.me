@@ -38,31 +38,23 @@
     padding: 20px;
     overflow: auto;
     height: 800px;
+    position: relative;
+    white-space: pre-wrap;
 
     .cursor {
-      position: relative;
-
-      i {
-        position: absolute;
-        width: 9px;
-        height: 80%;
-        background-color: gray;
-        left: 5px;
-        top: 10%;
-        animation-name: blink;
-        animation-duration: 800ms;
-        animation-iteration-count: infinite;
-        opacity: 1;
+      @keyframes cursor-blink {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 50;
+        }
       }
-
-      input:focus + i {
-        display: none;
-      }
-
-      @keyframes blink {
-        from { opacity: 1; }
-        to { opacity: 0; }
-      }
+      
+      width: 10px;
+      height: 20px;
+      background: gray;
+      animation: cursor-blink 1s steps(2) infinite;
     }
 
     .MuiTypography-h4	{

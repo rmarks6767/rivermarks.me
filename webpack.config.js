@@ -28,9 +28,12 @@ module.exports = {
   resolve: {
     extensions: ['', '.js', '.jsx'],
   },
-  plugins: [new HtmlWebpackPlugin({
-    name: 'index.html',
-    inject: false,
-    template: './src/index.html',
-  })],
+  plugins: [
+    new HtmlWebpackPlugin({
+      name: 'index.html',
+      inject: false,
+      template: './src/index.html',
+      favicon: './src/favicon.ico',
+    }),
+  ],
 };
