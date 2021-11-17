@@ -1,13 +1,13 @@
 import React from 'react';
-import Content from './content/content';
-import Footer from './footer';
-import Header from './header';
+import Content from './Content';
+import Footer from './Footer';
+import Header from './Header';
 
 const App = () => (
   <>
-    <Header />
+    {/* <Header /> */}
     <Content />
-    <Footer />
+    {/* <Footer /> */}
   </>
 );
 

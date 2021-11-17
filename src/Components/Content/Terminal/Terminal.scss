@@ -1,0 +1,73 @@
+.terminal {
+  background-color: black;
+  border-radius: 10px;
+
+  .top-bar {
+    background-color: grey;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  
+    .dots { 
+      display: flex;
+      align-items: center;
+      
+      .dot {
+        height: 14px;
+        width: 14px;
+        border-radius: 50%;
+        display: inline-block;
+        margin: 5px;
+      }
+      
+      .red {
+        background-color: #FF605C;
+      }
+      
+      .yellow {
+        background-color: #FFBD44;
+      }
+      
+      .green {
+        background-color: #00CA4E;
+      }
+    }
+  }  
+
+  .content {
+    word-break: break-all;
+    padding: 20px;
+    overflow: auto;
+    height: 800px;
+
+    .cursor {
+      position: relative;
+
+      i {
+        position: absolute;
+        width: 9px;
+        height: 80%;
+        background-color: gray;
+        left: 5px;
+        top: 10%;
+        animation-name: blink;
+        animation-duration: 800ms;
+        animation-iteration-count: infinite;
+        opacity: 1;
+      }
+
+      input:focus + i {
+        display: none;
+      }
+
+      @keyframes blink {
+        from { opacity: 1; }
+        to { opacity: 0; }
+      }
+    }
+
+    .MuiTypography-h4	{
+      font-family: monospace;
+    }
+    color: white;
+  }
+}

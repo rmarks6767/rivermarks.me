@@ -2,10 +2,10 @@ import React from 'react';
 import {
   BrowserRouter as Router, Routes, Route,
 } from 'react-router-dom';
-import About from './about';
-import Home from './home';
-import Projects from './projects';
-import Terminal from './terminal/terminal';
+import About from './About';
+import Home from './Home';
+import Projects from './Projects';
+import Terminal from './Terminal';
 
 const Content = () => (
   <Router>
