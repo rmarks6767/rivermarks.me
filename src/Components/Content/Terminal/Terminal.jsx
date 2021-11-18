@@ -1,6 +1,8 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 import { Typography } from '@mui/material';
-import React, { useEffect, useRef, useState } from 'react';
+import React, {
+  createRef, useEffect, useRef, useState,
+} from 'react';
 import Loremaster from '../Projects/Loremaster/Loremaster';
 import './Terminal.scss';
 
@@ -47,16 +49,19 @@ const Terminal = () => {
   ]);
   const [commands, setCommands] = useState([]);
   const [currentCommand, setCurrentCommand] = useState(-1);
+  const [cursorPosition, setCursorPosition] = useState(0);
   const [isFocused, setIsFocused] = useState(true);
   const [listenerSet, setListenerSet] = useState(false);
   const [controlPressed, setControlPressed] = useState(false);
 
   // References needed to access all the data in the event listener
+  const bottomRef = createRef();
   const currentDirectoryRef = useRef(currentDirectory);
   const inputRef = useRef(input);
   const commandsRef = useRef(commands);
   const currentCommandRef = useRef(currentCommand);
   const controlPressedRef = useRef(controlPressed);
+  const cursorPositionRef = useRef(cursorPosition);
 
   const userCommands = {
     cd: {
@@ -188,8 +193,22 @@ const Terminal = () => {
         //   }
         //   return i;
         // });
-      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
-        // TODO: Allow cursor movement in CLI
+      } else if (e.key === 'ArrowLeft') {
+        setCursorPosition((c) => {
+          if (-c < inputRef.current.length) {
+            cursorPositionRef.current = c - 1;
+            return c - 1;
+          }
+          return c;
+        });
+      } else if (e.key === 'ArrowRight') {
+        setCursorPosition((c) => {
+          if (-c > 0) {
+            cursorPositionRef.current = c + 1;
+            return c + 1;
+          }
+          return c;
+        });
       } else if (e.key === 'Enter') {
         setCommands((c) => {
           const newCommands = [
@@ -233,7 +252,14 @@ const Terminal = () => {
         // ignore
       } else {
         setInput((i) => {
-          const newInput = i + e.key;
+          const cp = cursorPositionRef.current;
+
+          console.log(cp);
+
+          console.log(`Front half: ${[...i].slice(-cp, inputRef.current.length).join('')}`);
+          console.log(`Back half: ${[...i].slice(0, -cp).join('')}`);
+
+          const newInput = `${[...i].slice(-cp, inputRef.current.length).join('')}${e.key}${[...i].slice(0, -cp).join('')}`;
           inputRef.current = newInput;
 
           return newInput;
@@ -270,7 +296,18 @@ const Terminal = () => {
       document.removeEventListener('paste', pasteListener);
       setListenerSet(false);
     }
-  }, [isFocused, input, listenerSet]);
+
+    bottomRef.current.scrollIntoView({ behavior: 'smooth' });
+  }, [
+    currentDirectory,
+    commands,
+    currentCommand,
+    isFocused,
+    controlPressed,
+    input,
+    output,
+    listenerSet,
+  ]);
 
   return (
     <div
@@ -292,7 +329,7 @@ const Terminal = () => {
             {o}
           </Typography>
         ))}
-        <div style={{ display: 'flex' }}>
+        <div ref={bottomRef} style={{ display: 'flex' }}>
           <Typography variant="h4">
             rivermarks.me:
             {currentDirectory}
@@ -300,7 +337,7 @@ const Terminal = () => {
             {' '}
             {input}
           </Typography>
-          <div className="cursor" />
+          <div style={{ marginLeft: `${8.5 * cursorPosition}px` }} className="cursor" />
         </div>
       </div>
     </div>

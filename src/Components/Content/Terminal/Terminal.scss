@@ -1,6 +1,7 @@
 .terminal {
   background-color: black;
   border-radius: 10px;
+  max-width: 1200px;
 
   .top-bar {
     background-color: grey;
@@ -37,7 +38,7 @@
     word-break: break-all;
     padding: 20px;
     overflow: auto;
-    height: 800px;
+    height: 600px;
     position: relative;
     white-space: pre-wrap;
 
