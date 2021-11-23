@@ -56,6 +56,7 @@ const Terminal = () => {
 
   // References needed to access all the data in the event listener
   const bottomRef = createRef();
+  const contentRef = createRef();
   const currentDirectoryRef = useRef(currentDirectory);
   const inputRef = useRef(input);
   const commandsRef = useRef(commands);
@@ -311,9 +312,12 @@ const Terminal = () => {
 
   return (
     <div
+      ref={contentRef}
       className="terminal"
-      role="textbox"
-      onFocus={() => setIsFocused(true)}
+      onFocus={() => {
+        setIsFocused(true);
+        contentRef.current.focus();
+      }}
     >
       <div className="top-bar">
         <div className="dots">
