@@ -1,3 +1,7 @@
 import Terminal from './Terminal';
+import MiniTerminal from './MiniTerminal';
 
-export default Terminal;
+export {
+  MiniTerminal,
+  Terminal,
+};

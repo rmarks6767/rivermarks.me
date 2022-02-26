@@ -3,7 +3,8 @@ import { Typography } from '@mui/material';
 import React, {
   createRef, useEffect, useRef, useState,
 } from 'react';
-import Loremaster from '../Projects/Loremaster/Loremaster';
+import Loremaster from '../Projects/Loremaster';
+import Resume from '../Resume';
 import './Terminal.scss';
 
 const KEYS_TO_IGNORE = [
@@ -28,11 +29,12 @@ const KEYS_TO_IGNORE = [
 
 const DIRECTORIES = {
   '~': {
+    About: {},
+    Experience: {},
     Projects: {
       loremaster: <Loremaster />,
     },
-    Experience: {},
-    About: {},
+    Resume: { display: <Resume /> },
   },
 
 };
@@ -42,8 +44,10 @@ const Terminal = () => {
   const [input, setInput] = useState('');
   const [output, setOutput] = useState([
     <div>
-      &nbsp;&nbsp;&nbsp;Welcome! If you have no idea what is going on with this box, press
-      the toggle in the upper right corner. Otherwise, type help to see a list of commands!
+      <h1>River Marks, Full Stack Software Engineer</h1>
+      &nbsp;&nbsp;&nbsp;Welcome to my website, a unix-influenced terminal to interact with things
+      about me! If you want the traditional website experience, click the little terminal in the
+      bottom right corner of the screen.
       <hr />
     </div>,
   ]);
@@ -311,37 +315,39 @@ const Terminal = () => {
   ]);
 
   return (
-    <div
-      ref={contentRef}
-      className="terminal"
-      onFocus={() => {
-        setIsFocused(true);
-        contentRef.current.focus();
-      }}
-    >
-      <div className="top-bar">
-        <div className="dots">
-          <div className="dot red" />
-          <div className="dot yellow" />
-          <div className="dot green" />
+    <div className="terminal-container">
+      <div
+        ref={contentRef}
+        className="terminal"
+        onFocus={() => {
+          setIsFocused(true);
+          contentRef.current.focus();
+        }}
+      >
+        <div className="top-bar">
+          <div className="dots">
+            <div className="dot red" />
+            <div className="dot yellow" />
+            <div className="dot green" />
+          </div>
         </div>
-      </div>
-      <div className="content">
-        {output.map((o, i) => (
+        <div className="content">
+          {output.map((o, i) => (
           // eslint-disable-next-line react/no-array-index-key
-          <Typography key={i} variant="h4">
-            {o}
-          </Typography>
-        ))}
-        <div ref={bottomRef} style={{ display: 'flex' }}>
-          <Typography variant="h4">
-            rivermarks.me:
-            {currentDirectory}
-            $
-            {' '}
-            {input}
-          </Typography>
-          <div style={{ marginLeft: `${8.5 * cursorPosition}px` }} className="cursor" />
+            <Typography key={i} variant="h4">
+              {o}
+            </Typography>
+          ))}
+          <div ref={bottomRef} style={{ display: 'flex' }}>
+            <Typography variant="h4">
+              rivermarks.me:
+              {currentDirectory}
+              $
+              {' '}
+              {input}
+            </Typography>
+            <div style={{ marginLeft: `${8.5 * cursorPosition}px` }} className="cursor" />
+          </div>
         </div>
       </div>
     </div>
