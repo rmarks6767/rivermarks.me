@@ -1,8 +1,9 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 import { Typography } from '@mui/material';
 import React, {
-  createRef, useEffect, useRef, useState,
+  createRef, forwardRef, useEffect, useRef, useState,
 } from 'react';
+import { Experience, EXPERIENCES } from '../Experience';
 import Loremaster from '../Projects/Loremaster';
 import Resume from '../Resume';
 import './Terminal.scss';
@@ -30,7 +31,35 @@ const KEYS_TO_IGNORE = [
 const DIRECTORIES = {
   '~': {
     About: {},
-    Experience: {},
+    Experience: (() => {
+      const experiences = {};
+
+      EXPERIENCES.forEach((exp) => {
+        const {
+          key,
+          logoImage,
+          logoAlt,
+          companyName,
+          companyTitle,
+          companyDate,
+          workTasks,
+        } = exp;
+
+        experiences[key] = (
+          <Experience
+            key={companyDate}
+            logoImage={logoImage}
+            logoAlt={logoAlt}
+            companyName={companyName}
+            companyTitle={companyTitle}
+            companyDate={companyDate}
+            workTasks={workTasks}
+          />
+        );
+      });
+
+      return experiences;
+    })(),
     Projects: {
       loremaster: <Loremaster />,
     },
@@ -39,7 +68,7 @@ const DIRECTORIES = {
 
 };
 
-const Terminal = () => {
+const Terminal = forwardRef((_, ref) => {
   const [currentDirectory, setCurrentDirectory] = useState('~');
   const [input, setInput] = useState('');
   const [output, setOutput] = useState([
@@ -315,7 +344,7 @@ const Terminal = () => {
   ]);
 
   return (
-    <div className="terminal-container">
+    <div ref={ref} className="terminal-container">
       <div
         ref={contentRef}
         className="terminal"
@@ -331,7 +360,7 @@ const Terminal = () => {
             <div className="dot green" />
           </div>
         </div>
-        <div className="content">
+        <div className="term-content">
           {output.map((o, i) => (
           // eslint-disable-next-line react/no-array-index-key
             <Typography key={i} variant="h4">
@@ -352,6 +381,6 @@ const Terminal = () => {
       </div>
     </div>
   );
-};
+});
 
 export default Terminal;
