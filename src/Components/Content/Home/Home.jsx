@@ -1,14 +1,15 @@
 import React from 'react';
 import './Home.scss';
+import { Parallax } from 'react-parallax';
 import { Experience, EXPERIENCES } from '../Experience';
-import Mountains from '../../../public/assets/mountains.png';
+import Waterfall from '../../../public/assets/waterfall.png';
 
 const Home = () => (
   <div className="home">
-    <div style={{ background: `url(${Mountains})` }} className="intro">
+    <Parallax bgImage={Waterfall} bgImageAlt="Waterfall" strength={500} className="intro">
       <h1 className="name">River Marks</h1>
-      <h2 className="title">Full Stack Software Engineer</h2>
-    </div>
+      <h2 className="title">Software Engineer</h2>
+    </Parallax>
     <div className="experiences">
       <h1 className="work-experience">Work Experience</h1>
       <div>

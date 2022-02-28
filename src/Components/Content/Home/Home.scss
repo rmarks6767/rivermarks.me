@@ -2,23 +2,26 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  background: center no-repeat url('../../../public/assets/mountains.png');
   font-family: monospace;
 
   .intro {
+    text-align: center;
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
     width: 100%;
     height: 100vh;
+    align-items: center;
 
     .name {
+      width: 100%;
       font-size: 120px;
       color: white;
+      background-color: #262626;
     }
     .title {
       font-size: 60px;
       color: white;
+      background-color: #262626;
     }
   }
 
