@@ -1,29 +1,32 @@
 import React, { useState } from 'react';
-import {
-  BrowserRouter as Router, Routes, Route,
-} from 'react-router-dom';
-import { MiniTerminal, Terminal } from './Content/Terminal';
 import Home from './Content/Home';
-import Resume from './Content/Resume';
+import Resume from './Resume';
+import HollowTerminal from './Terminal/HollowTerminal';
+import { Experiences } from './Experience';
+import Projects from './Projects';
 // import About from './Content/About';
 // import Projects from './Content/Projects';
 
 const App = () => {
-  const [terminalMode, setTerminalMode] = useState(true);
+  const [tab, setTab] = useState(0);
+  const [tabs, setTabs] = useState([
+    { key: 'home', label: 'Home' },
+    { key: 'Experience', label: 'Experience' },
+    { key: 'projects', label: 'Projects' },
+    { key: 'resume', label: 'Resume' },
+  ]);
 
   return (
-    <>
-      <MiniTerminal isActive={terminalMode} setIsActive={setTerminalMode} />
-      <Router>
-        <Routes>
-          {/* <Route path="about" element={<About />} />
-          <Route path="projects" element={<Projects />} /> */}
-          <Route path="resume" element={<Resume />} />
-          <Route exact path="/" element={terminalMode ? <Terminal /> : <Home />} />
-          {/* <Route exact path="/" element={<Home />} /> */}
-        </Routes>
-      </Router>
-    </>
+    <HollowTerminal
+      tab={tab}
+      setTab={setTab}
+      tabs={tabs}
+    >
+      {tab === 0 && <Home />}
+      {tab === 1 && <Experiences />}
+      {tab === 2 && <Projects />}
+      {tab === 3 && <Resume />}
+    </HollowTerminal>
   );
 };
 

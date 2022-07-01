@@ -19,7 +19,7 @@ const Experience = ({
         <h3>{companyDate}</h3>
       </div>
     </div>
-    <div className="content">
+    <div className="experience-content">
       <ul>
         {workTasks.map((task) => <li key={task}>{task}</li>)}
       </ul>

@@ -1,0 +1,14 @@
+.projects {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  font-family: monospace;
+  justify-content: center;
+
+  .projects-title {
+    text-align: center;
+    font-size: 100px;
+    color: white;
+  }
+}

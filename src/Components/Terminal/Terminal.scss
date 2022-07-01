@@ -1,10 +1,30 @@
 .terminal-container {
   padding: 5px;
 
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #333333; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 5px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(42, 42, 42); 
+    border-radius: 5px;
+  }
+
   .terminal {
     background-color: black;
     border-radius: 10px;
-    height: 100%;
     filter: drop-shadow(20px 20px 20px rgba(0,0,0,0.5));
     
     .top-bar {
@@ -42,10 +62,11 @@
       word-break: break-all;
       padding: 20px;
       overflow: auto;
-      height: 92vh;
+      height: calc(92vh - 32px);
       position: relative;
       white-space: pre-wrap;
-  
+      color: white;
+      
       .cursor {
         @keyframes cursor-blink {
           0% {
@@ -76,7 +97,6 @@
           font-size: 20px;
         }
       }
-      color: white;
     }
   }
 }
