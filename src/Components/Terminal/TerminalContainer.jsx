@@ -3,13 +3,28 @@ import PropTypes from 'prop-types';
 import { TerminalTab, TerminalTabs } from './Tabs';
 import './Terminal.scss';
 
-const HollowTerminal = ({
-  tab, setTab, tabs, children,
+const TerminalContainer = ({
+  isInput,
+  focusTextArea,
+  tab,
+  setTab,
+  tabs,
+  children,
 }) => {
   const Tab = TerminalTab(tabs.length);
 
   return (
-    <div className="terminal-container">
+    <div
+      className="terminal-container"
+      {
+        ...(isInput && {
+          role: 'textbox',
+          onClick: focusTextArea,
+          onKeyDown: focusTextArea,
+          tabIndex: 0,
+        }
+      )}
+    >
       <div className="terminal">
         <div className="top-bar">
           <div className="dots">
@@ -24,8 +39,12 @@ const HollowTerminal = ({
             value={tab}
             onChange={(_, newValue) => setTab(newValue)}
           >
-            {tabs.map(({ key, label }) => (
-              <Tab key={key} label={label} />
+            {tabs.map(({ label }) => (
+              <Tab
+                key={label}
+                label={label}
+                value={label}
+              />
             ))}
           </TerminalTabs>
         )}
@@ -37,20 +56,23 @@ const HollowTerminal = ({
   );
 };
 
-HollowTerminal.propTypes = {
-  children: PropTypes.node.isRequired,
+TerminalContainer.propTypes = {
+  isInput: PropTypes.bool,
+  focusTextArea: PropTypes.func,
+  tab: PropTypes.string,
+  setTab: PropTypes.func,
   tabs: PropTypes.arrayOf(PropTypes.shape({
-    key: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
   })),
-  tab: PropTypes.number,
-  setTab: PropTypes.func,
+  children: PropTypes.node.isRequired,
 };
 
-HollowTerminal.defaultProps = {
+TerminalContainer.defaultProps = {
+  isInput: false,
+  focusTextArea: () => {},
   tabs: [],
-  tab: 0,
+  tab: 'Home',
   setTab: () => {},
 };
 
-export default HollowTerminal;
+export default TerminalContainer;

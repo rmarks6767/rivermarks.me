@@ -1,32 +1,65 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Home from './Content/Home';
 import Resume from './Resume';
-import HollowTerminal from './Terminal/HollowTerminal';
+import TerminalContainer from './Terminal/TerminalContainer';
 import { Experiences } from './Experience';
 import Projects from './Projects';
-// import About from './Content/About';
-// import Projects from './Content/Projects';
+import Terminal from './Terminal/Terminal';
 
 const App = () => {
-  const [tab, setTab] = useState(0);
+  const [textAreaRef, setTextAreaRef] = useState();
+  const [currentDirectory, setCurrentDirectory] = useState('~');
+  const [tab, setTab] = useState('Home');
   const [tabs, setTabs] = useState([
-    { key: 'home', label: 'Home' },
-    { key: 'Experience', label: 'Experience' },
-    { key: 'projects', label: 'Projects' },
-    { key: 'resume', label: 'Resume' },
+    { label: 'Home', Component: Home },
+    { label: 'Experience', Component: Experiences },
+    { label: 'Projects', Component: Projects },
+    { label: 'Resume', Component: Resume },
+    { label: 'Terminal', Component: Terminal },
   ]);
 
+  useEffect(() => {
+    if (textAreaRef) {
+      const autoResize = () => {
+        textAreaRef.style.height = 'auto';
+        textAreaRef.style.height = `${textAreaRef.scrollHeight}px`;
+      };
+
+      textAreaRef.addEventListener('input', autoResize);
+
+      return () => {
+        textAreaRef.removeEventListener('input', autoResize);
+      };
+    }
+
+    return () => {};
+  }, [textAreaRef]);
+
   return (
-    <HollowTerminal
+    <TerminalContainer
+      isInput={tab === 'Terminal'}
       tab={tab}
       setTab={setTab}
       tabs={tabs}
+      focusTextArea={async () => {
+        if (textAreaRef) {
+          const end = textAreaRef.value.length + currentDirectory.length + 1;
+          textAreaRef.setSelectionRange(end, end);
+          textAreaRef.focus();
+        }
+      }}
     >
-      {tab === 0 && <Home />}
-      {tab === 1 && <Experiences />}
-      {tab === 2 && <Projects />}
-      {tab === 3 && <Resume />}
-    </HollowTerminal>
+      {tabs.map(({ label, Component }) => (
+        tab === label && (
+          <Component
+            key={label}
+            currentDirectory={currentDirectory}
+            setCurrentDirectory={setCurrentDirectory}
+            setTextAreaRef={setTextAreaRef}
+          />
+        )
+      ))}
+    </TerminalContainer>
   );
 };
 

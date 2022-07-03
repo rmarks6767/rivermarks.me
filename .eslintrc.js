@@ -18,6 +18,7 @@ module.exports = {
     'react',
   ],
   rules: {
+    'react/jsx-props-no-spreading': 'off',
     'linebreak-style': 0,
     'eslint linebreak-style': [0, 'error', 'unix'],
     'react/jsx-filename-extension': [2, {

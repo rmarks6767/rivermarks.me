@@ -53,7 +53,7 @@ const commands = {
             });
 
             if (dirDNE) {
-              setOutput((output) => [...output, `${commands.cd.text}: ${currentDir}`]);
+              setOutput((output) => [...output, `${commands.cd.error}: ${currentDir}`]);
             } else {
               return `${currentDirectory}/${directory}`;
             }

@@ -1,37 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './InputLine.scss';
 
 const InputLine = ({
-  textAreaRef,
   leadingText,
-  value,
-  setValue,
   setOutput,
   processCommand,
+  setTextAreaRef,
 }) => {
-  useEffect(() => {
-    const { current } = textAreaRef;
-
-    if (current) {
-      const autoResize = () => {
-        current.style.height = 'auto';
-        current.style.height = `${current.scrollHeight}px`;
-      };
-
-      current.addEventListener('input', autoResize);
-
-      return () => {
-        current.removeEventListener('input', autoResize);
-      };
-    }
-
-    return () => {};
-  }, [textAreaRef]);
+  const [value, setValue] = useState('');
 
   return (
     <textarea
-      ref={textAreaRef}
+      ref={setTextAreaRef}
       className="InputLine"
       value={`${leadingText} ${value}`}
       wrap="soft"
@@ -41,7 +22,7 @@ const InputLine = ({
         if (e.key === 'Enter') {
           e.preventDefault();
           setOutput((output) => [...output, `${leadingText} ${value}`]);
-          processCommand();
+          processCommand(value, () => setValue(''));
         }
       }}
       onChange={(e) => {
@@ -52,12 +33,10 @@ const InputLine = ({
 };
 
 InputLine.propTypes = {
-  textAreaRef: PropTypes.shape({ current: PropTypes.instanceOf(Element) }).isRequired,
   leadingText: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
-  setValue: PropTypes.func.isRequired,
   setOutput: PropTypes.func.isRequired,
   processCommand: PropTypes.func.isRequired,
+  setTextAreaRef: PropTypes.func.isRequired,
 };
 
 export default InputLine;
