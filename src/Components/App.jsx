@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Home from './Content/Home';
 import Resume from './Resume';
 import TerminalContainer from './Terminal/TerminalContainer';
+import { Terminal } from './Terminal';
 import { Experiences } from './Experience';
 import Projects from './Projects';
-import Terminal from './Terminal/Terminal';
+import useQuery from '../util/useQuery';
 
 const App = () => {
+  const query = useQuery();
+  const navigate = useNavigate();
+
   const [textAreaRef, setTextAreaRef] = useState();
   const [currentDirectory, setCurrentDirectory] = useState('~');
-  const [tab, setTab] = useState('Home');
+  const [tab, setTab] = useState(query.get('tab') || 'Home');
   const [tabs, setTabs] = useState([
     { label: 'Home', Component: Home },
     { label: 'Experience', Component: Experiences },
@@ -18,6 +23,8 @@ const App = () => {
     { label: 'Terminal', Component: Terminal },
   ]);
 
+  // Used to update path so page stays up to date
+  useEffect(() => navigate(`?tab=${tab}`), [tab]);
   useEffect(() => {
     if (textAreaRef) {
       const autoResize = () => {
@@ -39,8 +46,9 @@ const App = () => {
     <TerminalContainer
       isInput={tab === 'Terminal'}
       tab={tab}
-      setTab={setTab}
       tabs={tabs}
+      setTab={setTab}
+      setTabs={setTabs}
       focusTextArea={async () => {
         if (textAreaRef) {
           const end = textAreaRef.value.length + currentDirectory.length + 1;
@@ -56,6 +64,8 @@ const App = () => {
             currentDirectory={currentDirectory}
             setCurrentDirectory={setCurrentDirectory}
             setTextAreaRef={setTextAreaRef}
+            setTab={setTab}
+            setTabs={setTabs}
           />
         )
       ))}

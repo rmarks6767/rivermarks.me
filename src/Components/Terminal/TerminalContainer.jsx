@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { TerminalTab, TerminalTabs } from './Tabs';
 import './Terminal.scss';
+import CloseDialog from './CloseDialog/CloseDialog';
 
 const TerminalContainer = ({
   isInput,
@@ -9,14 +10,24 @@ const TerminalContainer = ({
   tab,
   setTab,
   tabs,
+  setTabs,
   children,
 }) => {
-  const Tab = TerminalTab(tabs.length);
+  const [open, setOpen] = useState('');
 
   return (
-    <div
-      className="terminal-container"
-      {
+    <>
+      <CloseDialog
+        tab={tab}
+        tabs={tabs}
+        setTab={setTab}
+        setTabs={setTabs}
+        open={open}
+        handleClose={() => setOpen('')}
+      />
+      <div
+        className="terminal-container"
+        {
         ...(isInput && {
           role: 'textbox',
           onClick: focusTextArea,
@@ -24,55 +35,64 @@ const TerminalContainer = ({
           tabIndex: 0,
         }
       )}
-    >
-      <div className="terminal">
-        <div className="top-bar">
-          <div className="dots">
-            <div className="dot red" />
-            <div className="dot yellow" />
-            <div className="dot green" />
+      >
+        <div className="terminal">
+          <div className="top-bar">
+            <div className="dots">
+              <div className="dot red" />
+              <div className="dot yellow" />
+              <div className="dot green" />
+            </div>
           </div>
-        </div>
-        {tabs.length > 1 && (
           <TerminalTabs
             style={{ width: '100%' }}
             value={tab}
-            onChange={(_, newValue) => setTab(newValue)}
+            onChange={(_, newValue) => {
+              setTab(newValue);
+            }}
           >
             {tabs.map(({ label }) => (
-              <Tab
+              <TerminalTab
+                tabIndex={0}
                 key={label}
                 label={label}
                 value={label}
+                numTabs={tabs.length}
+                selectedTab={tab}
+                onClick={() => setOpen(label)}
               />
             ))}
           </TerminalTabs>
-        )}
-        <div className="content">
-          {children}
+          <div className="content">
+            {children}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
 TerminalContainer.propTypes = {
+  children: PropTypes.node.isRequired,
+
   isInput: PropTypes.bool,
-  focusTextArea: PropTypes.func,
   tab: PropTypes.string,
-  setTab: PropTypes.func,
   tabs: PropTypes.arrayOf(PropTypes.shape({
     label: PropTypes.string.isRequired,
   })),
-  children: PropTypes.node.isRequired,
+
+  setTab: PropTypes.func,
+  setTabs: PropTypes.func,
+  focusTextArea: PropTypes.func,
 };
 
 TerminalContainer.defaultProps = {
   isInput: false,
-  focusTextArea: () => {},
   tabs: [],
   tab: 'Home',
   setTab: () => {},
+  setTabs: () => {},
+  focusTextArea: () => {},
 };
 
 export default TerminalContainer;

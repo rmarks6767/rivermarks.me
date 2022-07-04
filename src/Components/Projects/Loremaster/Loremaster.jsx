@@ -4,11 +4,14 @@ import {
 } from '@mui/material';
 import './Loremaster.scss';
 
+export const title = 'Project Loremaster';
+export const summaryBlurb = 'Project Loremaster is an automation of a DND campaign, with intentions to make a physical table to accompany the web application. The project is written in the below technologies, with the stack that I owned being  JavaScript, NodeJS, Express, GraphQL, and MongoDB';
+
 const TECH_STACK = ['React', 'JavaScript', 'NodeJS', 'Express', 'GraphQL', 'MongoDB'];
 
 const Loremaster = () => (
   <div className="loremaster">
-    <Typography gutterBottom variant="h3">
+    <Typography gutterBottom variant="h2">
       Project Loremaster
     </Typography>
     <hr />
