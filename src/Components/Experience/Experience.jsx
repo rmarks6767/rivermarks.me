@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './Experience.scss';
+import { Typography } from '@mui/material';
 
 const Experience = ({
   logoImage,
@@ -14,9 +15,27 @@ const Experience = ({
     <div className="header">
       <img alt={logoAlt} className="logo" src={logoImage} />
       <div className="company">
-        <h1>{companyName}</h1>
-        <h2>{companyTitle}</h2>
-        <h3>{companyDate}</h3>
+        <Typography
+          className="heading"
+          variant="h2"
+          component="h2"
+        >
+          {companyName}
+        </Typography>
+        <Typography
+          className="heading"
+          variant="h3"
+          component="h3"
+        >
+          {companyTitle}
+        </Typography>
+        <Typography
+          className="heading"
+          variant="h4"
+          component="h4"
+        >
+          {companyDate}
+        </Typography>
       </div>
     </div>
     <div className="experience-content">

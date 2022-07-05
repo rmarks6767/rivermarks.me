@@ -6,47 +6,60 @@
   align-items: center;
   flex-direction: column;
 
-
-  h1 {
-    &.projects-title {
-      font-size: 100px;
-    }
+  .projects-title {
+    font-family: monospace;
   }
 
   .project {
+    display: flex;
+    flex-direction: column;
+    height: 600px;
     width: 100%;
-    border-radius: 5px;
+    border-radius: 25px;
     transition: transform 250ms;
     word-break: break-word;
 
     &:hover {
       transform: scale(1.02);
       cursor: pointer;
+
+      .launch-icon {
+        opacity: 1;
+      }
+    }
+
+    &:focus {
+      transform: scale(1.02);
+
+      .launch-icon {
+        opacity: 1;
+      }
     }
 
     .project-pic {
-      max-height: 300px;
-      padding: '10px';
+      overflow: hidden;
+      height: 300px;
+      width: 300px;
+      padding: 10px;
+      border-radius: 25px;
+    }
+
+    .header {
+      font-family: monospace;
+      font-size: 50px;
     }
 
     .summary {
+      font-family: monospace;
       font-size: 20px;
-      text-overflow: ellipsis;
-      height: 50px;
-    }
-
-    .project-header {
-      padding: 5px;
-
-      h2 {
-        font-size: 50px;
-      }
     }
 
     .launch-icon {
       position: absolute;
-      right: 10px;
-      top: 10px;
+      right: 15px;
+      top: 15px;
+      opacity: 0;
+      transition: opacity 250ms;
     }
   }
 }

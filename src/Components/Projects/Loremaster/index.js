@@ -1,7 +1,8 @@
-import Loremaster, { title, summaryBlurb } from './Loremaster';
+import Loremaster, { title, blurb, date } from './Loremaster';
 
 export default Loremaster;
 export const loremasterSummary = {
   title,
-  summaryBlurb,
+  blurb,
+  date,
 };

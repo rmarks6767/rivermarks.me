@@ -8,6 +8,7 @@ import {
   Grid,
   Typography,
 } from '@mui/material';
+import LaunchIcon from '@mui/icons-material/Launch';
 import projects from '../../data/projects';
 import './Projects.scss';
 
@@ -31,23 +32,29 @@ const Projects = ({ setTab, setTabs }) => {
 
   return (
     <div className="projects">
-      <h1 className="projects-title">Projects</h1>
-      <Grid container spacing={2}>
+      <Typography
+        className="projects-title"
+        gutterBottom
+        variant="h1"
+        component="h1"
+      >
+        Projects
+      </Typography>
+      <Grid container spacing={2} alignItems="stretch">
         {projects.map(({
           Component,
           picture,
           pictureAlt,
           label,
-          summary: {
-            title,
-            summaryBlurb,
-          },
+          summary: { title, blurb, date },
         }) => (
-          <Grid key={label} item xs={4}>
+          <Grid key={label} item xs={12} lg={6} xl={4}>
             <Card className="project">
               <CardActionArea
+                className="project"
                 onClick={() => clickHandler(label, Component)}
               >
+                <LaunchIcon className="launch-icon" />
                 <CardMedia
                   className="project-pic"
                   component="img"
@@ -55,11 +62,23 @@ const Projects = ({ setTab, setTabs }) => {
                   image={picture}
                 />
                 <CardContent>
-                  <Typography gutterBottom variant="h3" component="div">
+                  <Typography
+                    gutterBottom
+                    className="header"
+                    variant="h3"
+                    component="div"
+                  >
                     {title}
                   </Typography>
+                  <Typography
+                    gutterBottom
+                    variant="h4"
+                    component="div"
+                  >
+                    {date}
+                  </Typography>
                   <Typography className="summary">
-                    {summaryBlurb}
+                    {blurb}
                   </Typography>
                 </CardContent>
               </CardActionArea>

@@ -1,10 +1,18 @@
+import { Typography } from '@mui/material';
 import React from 'react';
 import experiences from '../../data/experience';
 import Experience from './Experience';
 
 const Experiences = () => (
   <div className="experiences">
-    <h1 className="experiences-title">Work Experience</h1>
+    <Typography
+      className="experiences-title"
+      gutterBottom
+      variant="h1"
+      component="h1"
+    >
+      Experience
+    </Typography>
     <div>
       {experiences.map(({
         key,

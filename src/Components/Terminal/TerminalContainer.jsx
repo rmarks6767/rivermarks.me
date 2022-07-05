@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { TerminalTab, TerminalTabs } from './Tabs';
-import './Terminal.scss';
 import CloseDialog from './CloseDialog/CloseDialog';
+import './Terminal.scss';
 
 const TerminalContainer = ({
   isInput,

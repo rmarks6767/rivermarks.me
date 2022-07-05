@@ -5,7 +5,8 @@ import {
 import './Loremaster.scss';
 
 export const title = 'Project Loremaster';
-export const summaryBlurb = 'Project Loremaster is an automation of a DND campaign, with intentions to make a physical table to accompany the web application. The project is written in the below technologies, with the stack that I owned being  JavaScript, NodeJS, Express, GraphQL, and MongoDB';
+export const blurb = 'Web app designed to organize and automate parts of Dungeons & Dragons';
+export const date = 'January 2019 - Present';
 
 const TECH_STACK = ['React', 'JavaScript', 'NodeJS', 'Express', 'GraphQL', 'MongoDB'];
 
