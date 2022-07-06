@@ -40,7 +40,7 @@ const Projects = ({ setTab, setTabs }) => {
       >
         Projects
       </Typography>
-      <Grid container spacing={2} alignItems="stretch">
+      <Grid container spacing={2}>
         {projects.map(({
           Component,
           picture,
