@@ -1,29 +1,75 @@
-import React, { useState } from 'react';
-import {
-  BrowserRouter as Router, Routes, Route,
-} from 'react-router-dom';
-import { MiniTerminal, Terminal } from './Content/Terminal';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Home from './Content/Home';
-import Resume from './Content/Resume';
-// import About from './Content/About';
-// import Projects from './Content/Projects';
+import Resume from './Resume';
+import TerminalContainer from './Terminal/TerminalContainer';
+import { Terminal } from './Terminal';
+import { Experiences } from './Experience';
+import Projects from './Projects';
+import useQuery from '../util/useQuery';
 
 const App = () => {
-  const [terminalMode, setTerminalMode] = useState(true);
+  const query = useQuery();
+  const navigate = useNavigate();
+
+  const [textAreaRef, setTextAreaRef] = useState();
+  const [currentDirectory, setCurrentDirectory] = useState('~');
+  const [tab, setTab] = useState(query.get('tab') || 'Home');
+  const [tabs, setTabs] = useState([
+    { label: 'Home', Component: Home },
+    { label: 'Experience', Component: Experiences },
+    { label: 'Projects', Component: Projects },
+    { label: 'Resume', Component: Resume },
+    { label: 'Terminal', Component: Terminal },
+  ]);
+
+  // Used to update path so page stays up to date
+  useEffect(() => navigate(`?tab=${tab}`), [tab]);
+  useEffect(() => {
+    if (textAreaRef) {
+      const autoResize = () => {
+        textAreaRef.style.height = 'auto';
+        textAreaRef.style.height = `${textAreaRef.scrollHeight}px`;
+      };
+
+      textAreaRef.addEventListener('input', autoResize);
+
+      return () => {
+        textAreaRef.removeEventListener('input', autoResize);
+      };
+    }
+
+    return () => {};
+  }, [textAreaRef]);
 
   return (
-    <>
-      <MiniTerminal isActive={terminalMode} setIsActive={setTerminalMode} />
-      <Router>
-        <Routes>
-          {/* <Route path="about" element={<About />} />
-          <Route path="projects" element={<Projects />} /> */}
-          <Route path="resume" element={<Resume />} />
-          <Route exact path="/" element={terminalMode ? <Terminal /> : <Home />} />
-          {/* <Route exact path="/" element={<Home />} /> */}
-        </Routes>
-      </Router>
-    </>
+    <TerminalContainer
+      isInput={tab === 'Terminal'}
+      tab={tab}
+      tabs={tabs}
+      setTab={setTab}
+      setTabs={setTabs}
+      focusTextArea={async () => {
+        if (textAreaRef) {
+          const end = textAreaRef.value.length + currentDirectory.length + 1;
+          textAreaRef.setSelectionRange(end, end);
+          textAreaRef.focus();
+        }
+      }}
+    >
+      {tabs.map(({ label, Component }) => (
+        tab === label && (
+          <Component
+            key={label}
+            currentDirectory={currentDirectory}
+            setCurrentDirectory={setCurrentDirectory}
+            setTextAreaRef={setTextAreaRef}
+            setTab={setTab}
+            setTabs={setTabs}
+          />
+        )
+      ))}
+    </TerminalContainer>
   );
 };
 
