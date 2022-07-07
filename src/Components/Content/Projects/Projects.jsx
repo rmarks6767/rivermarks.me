@@ -9,7 +9,7 @@ import {
   Typography,
 } from '@mui/material';
 import LaunchIcon from '@mui/icons-material/Launch';
-import projects from '../../data/projects';
+import projects from '../../../data/projects';
 import './Projects.scss';
 
 const Projects = ({ setTab, setTabs }) => {

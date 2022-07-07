@@ -1,7 +1,6 @@
 import React from 'react';
-import { Experiences } from '../Components/Experience';
-import Loremaster from '../Components/Projects/Loremaster';
-import Resume from '../Components/Resume';
+import { Experiences } from '../Components/Content/Experience';
+import Loremaster from '../Components/Content/Projects/Loremaster';
 
 export default {
   '~': {
@@ -12,6 +11,5 @@ export default {
     Projects: {
       loremaster: { display: <Loremaster /> },
     },
-    Resume: { display: <Resume /> },
   },
 };

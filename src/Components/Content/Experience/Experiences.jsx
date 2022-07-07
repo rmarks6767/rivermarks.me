@@ -1,6 +1,6 @@
 import { Typography } from '@mui/material';
 import React from 'react';
-import experiences from '../../data/experience';
+import experiences from '../../../data/experience';
 import Experience from './Experience';
 
 const Experiences = () => (
