@@ -1,7 +1,7 @@
 import React from 'react';
 import ProjectPage from '../ProjectPage';
-import Minecraft from '../../../public/assets/mcs.webp';
-import MCSStore from '../../../public/assets/mcs-store.webp';
+import Minecraft from '../../../../../public/assets/mcs.webp';
+import MCSStore from '../../../../../public/assets/mcs-store.webp';
 import './MCS.scss';
 
 export const title = 'Charity Stream';

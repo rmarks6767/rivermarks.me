@@ -22,7 +22,7 @@
   .terminal {
     background-color: #171717;
     border-radius: 10px;
-    filter: drop-shadow(20px 20px 20px rgba(0,0,0,0.5));
+    // filter: drop-shadow(20px 20px 20px rgba(0,0,0,0.5));
     
     .top-bar {
       background-color: grey;
@@ -57,9 +57,12 @@
   
     .content {
       word-break: break-all;
-      padding: 20px;
       overflow: auto;
-      height: calc(87vh);
+      height: calc(100vh - 75.5px);
+
+      @media screen and (max-width: 850px)  {
+        height: calc((var(--vh, 1vh) * 100) - 80px);
+      }
       position: relative;
       white-space: pre-wrap;
       color: white;

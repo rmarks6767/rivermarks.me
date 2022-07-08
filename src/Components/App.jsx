@@ -1,75 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Home from './Content/Home';
-import Resume from './Resume';
-import TerminalContainer from './Terminal/TerminalContainer';
-import { Terminal } from './Terminal';
-import { Experiences } from './Experience';
-import Projects from './Projects';
-import useQuery from '../util/useQuery';
+import React, { useEffect } from 'react';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from 'react-router-dom';
+import Content from './Content';
 
 const App = () => {
-  const query = useQuery();
-  const navigate = useNavigate();
-
-  const [textAreaRef, setTextAreaRef] = useState();
-  const [currentDirectory, setCurrentDirectory] = useState('~');
-  const [tab, setTab] = useState(query.get('tab') || 'Home');
-  const [tabs, setTabs] = useState([
-    { label: 'Home', Component: Home },
-    { label: 'Experience', Component: Experiences },
-    { label: 'Projects', Component: Projects },
-    { label: 'Resume', Component: Resume },
-    { label: 'Terminal', Component: Terminal },
-  ]);
-
-  // Used to update path so page stays up to date
-  useEffect(() => navigate(`?tab=${tab}`), [tab]);
   useEffect(() => {
-    if (textAreaRef) {
-      const autoResize = () => {
-        textAreaRef.style.height = 'auto';
-        textAreaRef.style.height = `${textAreaRef.scrollHeight}px`;
-      };
-
-      textAreaRef.addEventListener('input', autoResize);
-
-      return () => {
-        textAreaRef.removeEventListener('input', autoResize);
-      };
-    }
-
-    return () => {};
-  }, [textAreaRef]);
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+  }, [window.innerHeight]);
 
   return (
-    <TerminalContainer
-      isInput={tab === 'Terminal'}
-      tab={tab}
-      tabs={tabs}
-      setTab={setTab}
-      setTabs={setTabs}
-      focusTextArea={async () => {
-        if (textAreaRef) {
-          const end = textAreaRef.value.length + currentDirectory.length + 1;
-          textAreaRef.setSelectionRange(end, end);
-          textAreaRef.focus();
-        }
-      }}
-    >
-      {tabs.map(({ label, Component }) => (
-        tab === label && (
-          <Component
-            key={label}
-            currentDirectory={currentDirectory}
-            setCurrentDirectory={setCurrentDirectory}
-            setTextAreaRef={setTextAreaRef}
-            setTab={setTab}
-            setTabs={setTabs}
-          />
-        )
-      ))}
-    </TerminalContainer>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Content />} />
+        <Route path="/resume.pdf" onEnter={() => window.location.reload()} />
+      </Routes>
+    </Router>
   );
 };
 

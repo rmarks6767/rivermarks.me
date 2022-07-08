@@ -2,7 +2,7 @@ import { Typography } from '@mui/material';
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import InputLine from './InputLine/InputLine';
-import commands from '../../data/commands';
+import commands from '../../../data/commands';
 import './Terminal.scss';
 
 const Terminal = ({

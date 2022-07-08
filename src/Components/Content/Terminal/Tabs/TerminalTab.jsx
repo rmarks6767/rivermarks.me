@@ -68,6 +68,7 @@ const TerminalTab = ({
   numTabs,
   onClick,
   label,
+  closable,
   ...props
 }) => {
   const [isHovering, setIsHovering] = useState(false);
@@ -77,6 +78,7 @@ const TerminalTab = ({
       style={{
         position: 'relative',
         width: `${100 / numTabs}%`,
+        minWidth: '200px',
         color: 'white',
         backgroundColor: '#444444',
         ...(selectedTab === label && selectedStyle),
@@ -90,12 +92,14 @@ const TerminalTab = ({
         onMouseLeave={() => setIsHovering(false)}
         {...props}
       />
-      <StyledIconButton
-        disableRipple
-        onMouseEnter={() => setIsHovering(true)}
-        onMouseLeave={() => setIsHovering(false)}
-        onClick={onClick}
-      />
+      {closable && (
+        <StyledIconButton
+          disableRipple
+          onMouseEnter={() => setIsHovering(true)}
+          onMouseLeave={() => setIsHovering(false)}
+          onClick={onClick}
+        />
+      )}
     </div>
   );
 };
@@ -105,6 +109,11 @@ TerminalTab.propTypes = {
   selectedTab: PropTypes.string.isRequired,
   numTabs: PropTypes.number.isRequired,
   onClick: PropTypes.func.isRequired,
+  closable: PropTypes.bool,
+};
+
+TerminalTab.defaultProps = {
+  closable: true,
 };
 
 export default TerminalTab;

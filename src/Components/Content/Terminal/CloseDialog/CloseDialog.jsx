@@ -31,6 +31,7 @@ const CloseDialog = ({
     </DialogContent>
     <DialogActions style={{ color: 'white', backgroundColor: '#444444' }}>
       <Button
+        disableRipple
         style={{
           color: 'white',
         }}
@@ -40,6 +41,7 @@ const CloseDialog = ({
         Cancel
       </Button>
       <Button
+        disableRipple
         autoFocus
         fullWidth
         variant="contained"
