@@ -43,8 +43,8 @@ module.exports = {
     new HtmlWebpackPlugin({
       name: 'index.html',
       inject: false,
-      template: './src/index.html',
-      favicon: './src/favicon.ico',
+      template: './public/index.html',
+      favicon: './public/favicon.ico',
     }),
   ],
 };

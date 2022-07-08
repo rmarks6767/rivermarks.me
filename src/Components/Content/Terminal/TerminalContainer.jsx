@@ -51,8 +51,9 @@ const TerminalContainer = ({
               setTab(newValue);
             }}
           >
-            {tabs.map(({ label }) => (
+            {tabs.map(({ label, closable }) => (
               <TerminalTab
+                closable={closable}
                 tabIndex={0}
                 key={label}
                 label={label}
@@ -74,13 +75,12 @@ const TerminalContainer = ({
 
 TerminalContainer.propTypes = {
   children: PropTypes.node.isRequired,
-
   isInput: PropTypes.bool,
   tab: PropTypes.string,
   tabs: PropTypes.arrayOf(PropTypes.shape({
     label: PropTypes.string.isRequired,
+    closable: PropTypes.bool,
   })),
-
   setTab: PropTypes.func,
   setTabs: PropTypes.func,
   focusTextArea: PropTypes.func,

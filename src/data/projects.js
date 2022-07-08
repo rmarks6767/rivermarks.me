@@ -1,9 +1,9 @@
 import Loremaster, { loremasterSummary } from '../Components/Content/Projects/Loremaster';
 import MCS, { mcsSummary } from '../Components/Content/Projects/MCS';
 import RiverMarksMe, { riverMarksMeSummary } from '../Components/Content/Projects/RiverMarksMe';
-import MCSStorePic from '../public/assets/mcs.webp';
-import LoremasterPic from '../public/assets/loremaster.webp';
-import RiverMarksMePic from '../public/assets/terminal.webp';
+import MCSStorePic from '../../public/assets/mcs.webp';
+import LoremasterPic from '../../public/assets/loremaster.webp';
+import RiverMarksMePic from '../../public/assets/terminal.webp';
 
 const projects = [
   {

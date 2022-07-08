@@ -1,6 +1,6 @@
-import LMLogo from '../public/assets/lm-logo.webp';
-import TLLogo from '../public/assets/thor-labs-logo.webp';
-import CTCTLogo from '../public/assets/ctct-logo.webp';
+import LMLogo from '../../public/assets/lm-logo.webp';
+import TLLogo from '../../public/assets/thor-labs-logo.webp';
+import CTCTLogo from '../../public/assets/ctct-logo.webp';
 
 const experiences = [{
   key: 'liberty-mutual_2021.exp',

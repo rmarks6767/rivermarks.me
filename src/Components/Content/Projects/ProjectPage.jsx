@@ -4,13 +4,13 @@ import {
   Grid, Typography, Chip, Avatar, Button, Stack,
 } from '@mui/material';
 import { GitHub, Web, List } from '@mui/icons-material';
-import ReactLogo from '../../../public/assets/react.webp';
-import NodeJSLogo from '../../../public/assets/nodejs.webp';
-import SassLogo from '../../../public/assets/sass.webp';
-import MySQLLogo from '../../../public/assets/mysql.webp';
-import JavaLogo from '../../../public/assets/java.webp';
-import GraphQLLogo from '../../../public/assets/graphql.webp';
-import MongoDBLogo from '../../../public/assets/mongodb.webp';
+import ReactLogo from '../../../../public/assets/react.webp';
+import NodeJSLogo from '../../../../public/assets/nodejs.webp';
+import SassLogo from '../../../../public/assets/sass.webp';
+import MySQLLogo from '../../../../public/assets/mysql.webp';
+import JavaLogo from '../../../../public/assets/java.webp';
+import GraphQLLogo from '../../../../public/assets/graphql.webp';
+import MongoDBLogo from '../../../../public/assets/mongodb.webp';
 import './ProjectPage.scss';
 
 const LANGUAGES = {

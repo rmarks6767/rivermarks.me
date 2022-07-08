@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Home from './Home';
 import TerminalContainer from './Terminal/TerminalContainer';
-import { Terminal } from './Terminal';
 import { Experiences } from './Experience';
 import Projects from './Projects';
 import useQuery from '../../util/useQuery';
@@ -15,10 +14,9 @@ const Content = () => {
   const [currentDirectory, setCurrentDirectory] = useState('~');
   const [tab, setTab] = useState(query.get('tab') || 'Home');
   const [tabs, setTabs] = useState([
-    { label: 'Home', Component: Home },
-    { label: 'Experience', Component: Experiences },
-    { label: 'Projects', Component: Projects },
-    { label: 'Terminal', Component: Terminal },
+    { Component: Home, label: 'Home', closable: false },
+    { Component: Experiences, label: 'Experience', closable: false },
+    { Component: Projects, label: 'Projects', closable: false },
   ]);
 
   // Used to update path so page stays up to date
