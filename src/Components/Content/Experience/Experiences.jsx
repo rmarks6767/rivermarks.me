@@ -1,7 +1,7 @@
 import { Typography } from '@mui/material';
 import React from 'react';
-import experiences from '../../../data/experience';
 import Experience from './Experience';
+import EXPERIENCE from '../../../constants/experience';
 
 const Experiences = () => (
   <div className="experiences">
@@ -14,7 +14,7 @@ const Experiences = () => (
       Experience
     </Typography>
     <div>
-      {experiences.map(({
+      {EXPERIENCE.map(({
         key,
         logoImage,
         logoAlt,

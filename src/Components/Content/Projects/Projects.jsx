@@ -1,16 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  Card,
-  CardActionArea,
   CardContent,
-  CardMedia,
   Grid,
   Typography,
 } from '@mui/material';
-import LaunchIcon from '@mui/icons-material/Launch';
-import projects from '../../../data/projects';
-import './Projects.scss';
+import PROJECTS from '../../../constants/projects';
 
 const Projects = ({ setTab, setTabs }) => {
   const clickHandler = (label, Component) => {
@@ -41,48 +36,59 @@ const Projects = ({ setTab, setTabs }) => {
         Projects
       </Typography>
       <Grid container spacing={2}>
-        {projects.map(({
+        {PROJECTS.map(({
           Component,
-          picture,
+          Picture,
           pictureAlt,
           label,
-          summary: { title, blurb, date },
+          summary: {
+            title,
+            blurb,
+            date,
+          },
         }) => (
-          <Grid key={label} item xs={12} lg={6} xl={4}>
-            <Card className="project">
-              <CardActionArea
-                className="project"
-                onClick={() => clickHandler(label, Component)}
-              >
-                <LaunchIcon className="launch-icon" />
-                <CardMedia
-                  className="project-pic"
-                  component="img"
-                  alt={pictureAlt}
-                  image={picture}
-                />
-                <CardContent>
-                  <Typography
-                    gutterBottom
-                    className="header"
-                    variant="h3"
-                    component="div"
-                  >
-                    {title}
-                  </Typography>
-                  <Typography
-                    gutterBottom
-                    variant="h4"
-                    component="div"
-                  >
-                    {date}
-                  </Typography>
-                  <Typography className="summary">
-                    {blurb}
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
+          <Grid
+            key={label}
+            item
+            xs={12}
+            lg={6}
+            xl={4}
+          >
+            <div
+              className="project"
+              role="button"
+              onClick={() => clickHandler(label, Component)}
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  clickHandler(label, Component);
+                }
+              }}
+            >
+              {/* <LaunchIcon className="launch-icon" /> */}
+              <img className="project-picture" alt={pictureAlt} src={Picture} />
+              <CardContent>
+                <Typography
+                  gutterBottom
+                  className="project-header"
+                  variant="h3"
+                  component="h3"
+                >
+                  {title}
+                </Typography>
+                <Typography
+                  gutterBottom
+                  className="project-date"
+                  variant="h4"
+                  component="h4"
+                >
+                  {date}
+                </Typography>
+                <Typography className="project-summary">
+                  {blurb}
+                </Typography>
+              </CardContent>
+            </div>
           </Grid>
         ))}
       </Grid>

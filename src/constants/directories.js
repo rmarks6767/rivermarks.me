@@ -2,7 +2,7 @@ import React from 'react';
 import { Experiences } from '../Components/Content/Experience';
 import Loremaster from '../Components/Content/Projects/Loremaster';
 
-export default {
+const DIRECTORIES = {
   '~': {
     About: {},
     Experience: {
@@ -13,3 +13,5 @@ export default {
     },
   },
 };
+
+export default DIRECTORIES;

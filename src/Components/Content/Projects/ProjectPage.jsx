@@ -1,48 +1,11 @@
-import React, { createRef, isValidElement } from 'react';
+import React, { createRef } from 'react';
 import PropTypes from 'prop-types';
 import {
   Grid, Typography, Chip, Avatar, Button, Stack,
 } from '@mui/material';
 import { GitHub, Web, List } from '@mui/icons-material';
-import ReactLogo from '../../../../public/assets/react.webp';
-import NodeJSLogo from '../../../../public/assets/nodejs.webp';
-import SassLogo from '../../../../public/assets/sass.webp';
-import MySQLLogo from '../../../../public/assets/mysql.webp';
-import JavaLogo from '../../../../public/assets/java.webp';
-import GraphQLLogo from '../../../../public/assets/graphql.webp';
-import MongoDBLogo from '../../../../public/assets/mongodb.webp';
-import './ProjectPage.scss';
-
-const LANGUAGES = {
-  React: {
-    logo: ReactLogo,
-    link: 'https://reactjs.org',
-  },
-  NodeJS: {
-    logo: NodeJSLogo,
-    link: 'https://nodejs.org',
-  },
-  Sass: {
-    logo: SassLogo,
-    link: 'https://sass-lang.com',
-  },
-  MySQL: {
-    logo: MySQLLogo,
-    link: 'https://www.mysql.com',
-  },
-  Java: {
-    logo: JavaLogo,
-    link: 'https://www.java.com',
-  },
-  GraphQL: {
-    logo: GraphQLLogo,
-    link: 'https://graphql.org',
-  },
-  MongoDB: {
-    logo: MongoDBLogo,
-    link: 'https://www.mongodb.com',
-  },
-};
+import LANGUAGES from '../../../constants/langauges';
+// import './ProjectPage.scss';
 
 const ProjectPage = ({
   title,
@@ -111,7 +74,11 @@ const ProjectPage = ({
                   TLDR
                 </Button>
               </div>
-              <Stack direction="row" spacing={1}>
+              <Stack
+                direction="row"
+                className="tech-stack"
+                spacing={1}
+              >
                 {techStack.map((language) => {
                   const { link, logo } = LANGUAGES[language];
 
@@ -146,6 +113,7 @@ const ProjectPage = ({
                     body,
                     lg = 12,
                     titleLevel = 'h3',
+                    shouldSoloRender = false,
                     title: sectionTitle,
                   } = part;
 
@@ -170,14 +138,14 @@ const ProjectPage = ({
                       )}
                       {body && (
                       <div className="project-body-container">
-                        {isValidElement(body)
+                        {shouldSoloRender
                           ? body
                           : (
                             <Typography
                               gutterBottom
                               className="project-body"
                               variant="body1"
-                              component="p"
+                              component="div"
                             >
                               {body}
                             </Typography>
@@ -210,10 +178,8 @@ ProjectPage.propTypes = {
           lg: PropTypes.number,
           title: PropTypes.string,
           titleLevel: PropTypes.string,
-          body: PropTypes.oneOfType([
-            PropTypes.node,
-            PropTypes.string,
-          ]),
+          shouldSoloRender: PropTypes.bool,
+          body: PropTypes.node,
         }),
       ),
     }),

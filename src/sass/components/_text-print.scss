@@ -4,29 +4,20 @@
   font-family: monospace;
   color: white; 
 
-  h1 {
-    font-size: 120px;
-    margin: 0;
-
-    @media screen and (max-width: 850px)  {
-      font-size: 40px;
-    }
-  }
-
-  h2 {
-    font-size: 60px;
-    margin: 0;
-
-    @media screen and (max-width: 850px)  {
-      font-size: 20px;
-    }
-  }
-
-
   @keyframes cursor-blink {
     0% {
       opacity: 0;
     }
+  }
+
+  h1 {
+    @include text-size($headings, h0);
+    margin: 0;
+  }
+
+  h2 {
+    @include text-size($headings, h3);
+    margin: 0;
   }
 
   .text-cursor {
@@ -52,7 +43,6 @@
         width: 12px;
         height: 25px;
       }
-    }
-    
+    } 
   }
 }

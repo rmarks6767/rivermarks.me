@@ -1,0 +1,61 @@
+// _typography.scss
+$font-type: monospace;
+$headings: (
+  "h0": (
+    "small": 45px,
+    "medium": 55px,
+    "large": 65px,
+    "x-large": 75px,
+    "2x-large": 85px,
+    "3x-large": 95px
+  ),
+  "h1": (
+    "small": 30px,
+    "medium": 40px,
+    "large": 50px,
+    "x-large": 60px,
+    "2x-large": 70px,
+    "3x-large": 80px
+  ),
+  "h2": (
+    "small": 26px,
+    "medium": 36px,
+    "large": 46px,
+    "x-large": 56px,
+    "2x-large": 66px,
+    "3x-large": 76px
+  ),
+  "h3": (
+    "small": 20px,
+    "medium": 30px,
+    "large": 40px,
+    "x-large": 50px,
+    "2x-large": 60px,
+    "3x-large": 70px
+  ),
+  "h4": (
+    "small": 16px,
+    "medium": 26px,
+    "large": 36px,
+    "x-large": 46px,
+    "2x-large": 56px,
+    "3x-large": 66px
+  ),
+  "h5": (
+    "small": 10px,
+    "medium": 20px,
+    "large": 30px,
+    "x-large": 40px,
+    "2x-large": 50px,
+    "3x-large": 60px
+  ),
+);
+
+$body: (
+  "small": 15px,
+  "medium": 20px,
+  "large": 25px,
+  "x-large": 30px,
+  "2x-large": 35px,
+  "3x-large": 40px
+);

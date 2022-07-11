@@ -2,7 +2,7 @@ import LMLogo from '../../public/assets/lm-logo.webp';
 import TLLogo from '../../public/assets/thor-labs-logo.webp';
 import CTCTLogo from '../../public/assets/ctct-logo.webp';
 
-const experiences = [{
+const EXPERIENCE = [{
   key: 'liberty-mutual_2021.exp',
   logoImage: LMLogo,
   logoAlt: 'Liberty Mutual Logo',
@@ -59,4 +59,4 @@ const experiences = [{
   ],
 }];
 
-export default experiences;
+export default EXPERIENCE;
