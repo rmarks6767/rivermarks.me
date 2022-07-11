@@ -5,7 +5,6 @@ import {
 } from '@mui/material';
 import { GitHub, Web, List } from '@mui/icons-material';
 import LANGUAGES from '../../../constants/langauges';
-// import './ProjectPage.scss';
 
 const ProjectPage = ({
   title,
