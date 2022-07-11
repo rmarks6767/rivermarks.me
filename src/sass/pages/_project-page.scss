@@ -1,0 +1,132 @@
+.project-page {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  word-break: break-word;
+
+  h1 {
+    @include text-size($headings, h1);
+  }
+
+  h2 {
+    @include text-size($headings, h2);
+  }
+
+  h3 {
+    @include text-size($headings, h3);
+  }
+
+  h4 {
+    @include text-size($headings, h3);
+  }
+
+  .body-paragraph {
+    @include text-size($body);
+  }
+
+  .project-sections {
+    display: flex;
+    flex-wrap: wrap;
+    font-family: monospace;
+    justify-content: center;
+    align-items: center;
+    width: 95%;
+
+    .project-section {
+      width: 100%;
+      justify-content: center;
+      display: flex;
+      margin: 10px;
+
+      .project-section-part {
+        a {
+          color: #989898;
+
+          &:hover {
+            color: white;
+          }
+        }
+
+        hr {
+          border-radius: 25px;
+          background-color: white;
+          height: 500px;
+          width: 0.25px;
+
+          @media screen and (max-width: 1200px)  {
+            display: none;
+          }
+        }
+
+        .project-body-container {
+          display: flex;
+          justify-content: center;
+
+          .project-body {
+            width: 100%;
+            font-family: monospace;
+            align-items: center;
+          }
+        }
+
+        .project-topbar {
+          width: 100%;
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          justify-content: space-between;
+          background-color: #383838;
+          border-radius: 5px;
+          
+          @media screen and (max-width: 800px)  {
+            justify-content: center;
+          }
+
+          .tech-stack {
+            padding-right: 10px;
+
+            @media screen and (max-width: 910px)  {
+              display: none;
+            }
+
+            .project-technology {    
+              font-family: monospace;
+              color: white;
+              transition: background-color 250ms;
+              background-color: #272727;
+  
+              span {
+                font-family: inherit;
+                font-size: 20px; 
+              }
+          
+              &:hover, &:active {
+                background-color: #757575;
+              }
+            }
+          }
+          
+          .project-buttons {
+            a, button {
+              font-size: 20px; 
+              color: white;
+              font-family: monospace;
+
+              @media screen and (max-width: 800px)  {
+                font-size: 15px; 
+              }
+
+              @media screen and (max-width: 400px)  {
+                font-size: 10px; 
+              }
+
+              &:hover {
+                background-color: #757575;
+              }
+            }
+          }
+        }
+      }      
+    }
+  }
+}

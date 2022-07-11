@@ -1,7 +1,7 @@
 import React from 'react';
-import directories from './directories';
+import DIRECTORIES from './directories';
 
-const commands = {
+const COMMANDS = {
   cd: {
     possibleArgs: 1,
     help: (
@@ -38,7 +38,7 @@ const commands = {
           setCurrentDirectory((currentDirectory) => {
             const [root, ...paths] = `${currentDirectory}/${directory}`.split('/');
 
-            let currentDir = directories[root];
+            let currentDir = DIRECTORIES[root];
             let dirDNE = false;
 
             paths.forEach((path) => {
@@ -53,7 +53,7 @@ const commands = {
             });
 
             if (dirDNE) {
-              setOutput((output) => [...output, `${commands.cd.error}: ${currentDir}`]);
+              setOutput((output) => [...output, `${COMMANDS.cd.error}: ${currentDir}`]);
             } else {
               return `${currentDirectory}/${directory}`;
             }
@@ -102,14 +102,14 @@ const commands = {
       if (args.length) {
         const command = args[0];
 
-        if (commands[command]) {
-          setOutput((output) => [...output, commands[command].help]);
+        if (COMMANDS[command]) {
+          setOutput((output) => [...output, COMMANDS[command].help]);
         } else {
           setOutput((output) => [...output, 'That command does not exist, try \'help\' to see all possible commands']);
         }
       } else {
-        setOutput((output) => [...output, ...Object.keys(commands).map((command) => {
-          const { help } = commands[command];
+        setOutput((output) => [...output, ...Object.keys(COMMANDS).map((command) => {
+          const { help } = COMMANDS[command];
 
           return help;
         })]);
@@ -133,7 +133,7 @@ const commands = {
       const { currentDirectory, setOutput } = event;
 
       const [root, ...dirs] = currentDirectory.split('/');
-      let current = directories[root];
+      let current = DIRECTORIES[root];
 
       dirs.forEach((dir) => {
         current = current[dir];
@@ -206,4 +206,4 @@ const commands = {
   },
 };
 
-export default commands;
+export default COMMANDS;

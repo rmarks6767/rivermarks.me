@@ -2,8 +2,7 @@ import { Typography } from '@mui/material';
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import InputLine from './InputLine/InputLine';
-import commands from '../../../data/commands';
-import './Terminal.scss';
+import COMMANDS from '../../../constants/commands';
 
 const Terminal = ({
   setCurrentDirectory,
@@ -23,12 +22,12 @@ const Terminal = ({
       setCurrentDirectory,
     };
 
-    if (commands[command]) {
+    if (COMMANDS[command]) {
       const {
         possibleArgs,
         help,
         successHandler,
-      } = commands[command];
+      } = COMMANDS[command];
 
       if (possibleArgs === -1 || possibleArgs >= args.length) {
         successHandler(event);
@@ -39,7 +38,7 @@ const Terminal = ({
         ]);
       }
     } else {
-      commands.default.successHandler(event);
+      COMMANDS.default.successHandler(event);
     }
 
     commandClear();

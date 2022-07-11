@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import './InputLine.scss';
 
 const InputLine = ({
   leadingText,
@@ -13,7 +12,7 @@ const InputLine = ({
   return (
     <textarea
       ref={setTextAreaRef}
-      className="InputLine"
+      className="input-line"
       value={`${leadingText} ${value}`}
       wrap="soft"
       autoCorrect="off"

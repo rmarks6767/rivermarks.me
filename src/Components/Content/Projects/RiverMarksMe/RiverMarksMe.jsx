@@ -1,6 +1,5 @@
 import React from 'react';
 import ProjectPage from '../ProjectPage';
-import './RiverMarksMe.scss';
 
 export const title = 'rivermarks.me';
 export const blurb = 'Personal website designed like a terminal to offer a unique way to view my accomplishments';

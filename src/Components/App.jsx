@@ -5,18 +5,26 @@ import {
   Route,
 } from 'react-router-dom';
 import Content from './Content';
+import '../sass/app.scss';
 
 const App = () => {
   useEffect(() => {
-    const vh = window.innerHeight * 0.01;
-    document.documentElement.style.setProperty('--vh', `${vh}px`);
-  }, [window.innerHeight]);
+    const resize = () => {
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    };
+
+    window.addEventListener('resize', resize);
+
+    return () => {
+      window.removeEventListener('resize', resize);
+    };
+  }, []);
 
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Content />} />
-        <Route path="/resume.pdf" onEnter={() => window.location.reload()} />
       </Routes>
     </Router>
   );

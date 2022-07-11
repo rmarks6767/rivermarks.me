@@ -1,5 +1,4 @@
 import React from 'react';
-import './Loremaster.scss';
 import ProjectPage from '../ProjectPage';
 
 export const title = 'Project Loremaster';

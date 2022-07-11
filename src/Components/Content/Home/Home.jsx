@@ -5,7 +5,6 @@ import {
   Email, GitHub, LinkedIn, Phone,
 } from '@mui/icons-material';
 import TextPrint from '../../TextPrint';
-import './Home.scss';
 
 const Home = ({ setTab }) => (
   <div className="home">
@@ -18,7 +17,7 @@ const Home = ({ setTab }) => (
       headingLevel="h2"
       delay={11}
     />
-    <hr />
+    <hr className="separator" />
     <div className="quick-links">
       <Button
         className="link"

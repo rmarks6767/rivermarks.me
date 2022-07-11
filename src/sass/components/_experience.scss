@@ -1,0 +1,67 @@
+@use "sass:map";
+
+.experience {
+  @include flex(row, left, center);
+
+  color: white;
+  background-color: $darker-gray;
+  border-radius: $rounded;
+  margin: 10px;
+  padding: 10px;
+  max-width: 1500px;
+  word-break: break-word;
+
+  .experience-header {
+    @include flex(row, left, center) {
+      @media screen and (min-width: map.get($breakpoints, small, min)) and (max-width: map.get($breakpoints, large, max)){
+        justify-content: center;
+      }
+    }
+
+    .experience-logo {
+      @include image-size((
+        "small": 150px,
+        "medium": 200px,
+        "large": 200px,
+        "x-large": 200px,
+        "2x-large": 300px,
+        "3x-large": 300px
+      ));
+      
+      border-radius: $rounded;
+    }
+
+    .experience-info {
+      @media screen and (min-width: map.get($breakpoints, large, min)) {
+        padding-left: 20px
+      }
+
+
+      .experience-company {
+        @include text-size($headings, h2);
+        padding-top: 10px;
+      }
+  
+      .experience-role {
+        @include text-size($headings, h4);
+        padding-top: 10px;
+      }
+  
+      .experience-date {
+        @include text-size($headings, h5);
+        padding-top: 10px;
+      }
+    }
+  }
+
+  .experience-content {
+    ul {
+      @include text-size($body);
+
+      li {
+        padding-top: 5px;
+        padding-bottom: 5px;
+      }
+    }
+  }
+}
