@@ -1,3 +1,7 @@
 import Experience from './Experience';
+import Experiences from './Experiences';
 
-export default Experience;
+export {
+  Experience,
+  Experiences,
+};

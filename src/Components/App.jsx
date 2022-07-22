@@ -1,29 +1,32 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import {
-  BrowserRouter as Router, Routes, Route,
+  BrowserRouter as Router,
+  Routes,
+  Route,
 } from 'react-router-dom';
-import { MiniTerminal, Terminal } from './Content/Terminal';
-import Home from './Content/Home';
-import Resume from './Content/Resume';
-// import About from './Content/About';
-// import Projects from './Content/Projects';
+import Content from './Content';
+import '../sass/app.scss';
 
 const App = () => {
-  const [terminalMode, setTerminalMode] = useState(true);
+  useEffect(() => {
+    const resize = () => {
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    };
+
+    window.addEventListener('resize', resize);
+
+    return () => {
+      window.removeEventListener('resize', resize);
+    };
+  }, []);
 
   return (
-    <>
-      <MiniTerminal isActive={terminalMode} setIsActive={setTerminalMode} />
-      <Router>
-        <Routes>
-          {/* <Route path="about" element={<About />} />
-          <Route path="projects" element={<Projects />} /> */}
-          <Route path="resume" element={<Resume />} />
-          <Route exact path="/" element={terminalMode ? <Terminal /> : <Home />} />
-          {/* <Route exact path="/" element={<Home />} /> */}
-        </Routes>
-      </Router>
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Content />} />
+      </Routes>
+    </Router>
   );
 };
 

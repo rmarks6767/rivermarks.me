@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './Terminal.scss';
 
 /**
  * This is a little terminal to control the visibility of the big terminal

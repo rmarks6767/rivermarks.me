@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './Experience.scss';
+import { Typography } from '@mui/material';
 
 const Experience = ({
   logoImage,
@@ -11,15 +11,37 @@ const Experience = ({
   workTasks,
 }) => (
   <div className="experience">
-    <div className="header">
-      <img alt={logoAlt} className="logo" src={logoImage} />
-      <div className="company">
-        <h1>{companyName}</h1>
-        <h2>{companyTitle}</h2>
-        <h3>{companyDate}</h3>
+    <div className="experience-header">
+      <img
+        alt={logoAlt}
+        className="experience-logo"
+        src={logoImage}
+      />
+      <div className="experience-info">
+        <Typography
+          className="experience-company"
+          variant="h2"
+          component="h2"
+        >
+          {companyName}
+        </Typography>
+        <Typography
+          className="experience-role"
+          variant="h3"
+          component="h3"
+        >
+          {companyTitle}
+        </Typography>
+        <Typography
+          className="experience-date"
+          variant="h4"
+          component="h4"
+        >
+          {companyDate}
+        </Typography>
       </div>
     </div>
-    <div className="content">
+    <div className="experience-content">
       <ul>
         {workTasks.map((task) => <li key={task}>{task}</li>)}
       </ul>
