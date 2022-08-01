@@ -27,6 +27,10 @@ const LANGUAGES = {
     logo: JavaLogo,
     link: 'https://www.java.com',
   },
+  Python: {
+    logo: JavaLogo,
+    link: 'https://www.python.com',
+  },
   GraphQL: {
     logo: GraphQLLogo,
     link: 'https://graphql.org',

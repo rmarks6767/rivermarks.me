@@ -2,10 +2,6 @@ import React from 'react';
 import ProjectPage from '../ProjectPage';
 import Minecraft from '../../../../../public/assets/mcs.webp';
 
-export const title = 'Charity Stream';
-export const blurb = 'Web app created to allow users to buy items and effects for players competing in Minecraft mini-games';
-export const date = 'January 2019 - Present';
-
 const MCS = () => (
   <ProjectPage
     title="Minecraft Charity Stream"

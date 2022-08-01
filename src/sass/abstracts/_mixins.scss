@@ -32,10 +32,20 @@
   }
 }
 
-@mixin image-size($sizes) {  
+@mixin image-size($sizes, $include-width: true) {  
   @each $breakpoint, $size in $breakpoints {
     @include apply-breakpoint($breakpoint) {
-      width: map.get($sizes, $breakpoint);
+      @if($include-width) {
+        width: map.get($sizes, $breakpoint);
+      }
+      height: map.get($sizes, $breakpoint);
+    }
+  }
+}
+
+@mixin image-height($sizes) {  
+  @each $breakpoint, $size in $breakpoints {
+    @include apply-breakpoint($breakpoint) {
       height: map.get($sizes, $breakpoint);
     }
   }

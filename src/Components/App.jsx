@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom';
 import Content from './Content';
 import '../sass/app.scss';
+import Roogle from './Content/Roogle';
 
 const App = () => {
   useEffect(() => {
@@ -25,6 +26,7 @@ const App = () => {
     <Router>
       <Routes>
         <Route path="/" element={<Content />} />
+        <Route path="/roogle" element={<Roogle />} />
       </Routes>
     </Router>
   );

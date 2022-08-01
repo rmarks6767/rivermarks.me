@@ -4,7 +4,7 @@ import {
   Grid, Typography, Chip, Avatar, Button, Stack,
 } from '@mui/material';
 import { GitHub, Web, List } from '@mui/icons-material';
-import LANGUAGES from '../../../constants/langauges';
+import LANGUAGES from '../../../constants/languages';
 
 const ProjectPage = ({
   title,

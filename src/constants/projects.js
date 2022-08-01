@@ -7,6 +7,13 @@ import RiverMarksMePic from '../../public/assets/terminal.png';
 
 const PROJECTS = [
   {
+    summary: riverMarksMeSummary,
+    Picture: RiverMarksMePic,
+    pictureAlt: 'Unix Terminal',
+    label: 'rivermarks.me',
+    Component: RiverMarksMe,
+  },
+  {
     summary: mcsSummary,
     Picture: MCSStorePic,
     pictureAlt: 'Minecraft Charity Stream',
@@ -19,13 +26,6 @@ const PROJECTS = [
     pictureAlt: 'Dice',
     label: 'Loremaster',
     Component: Loremaster,
-  },
-  {
-    summary: riverMarksMeSummary,
-    Picture: RiverMarksMePic,
-    pictureAlt: 'Unix Terminal',
-    label: 'rivermarks.me',
-    Component: RiverMarksMe,
   },
 ];
 
