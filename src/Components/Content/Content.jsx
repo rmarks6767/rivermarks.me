@@ -5,7 +5,6 @@ import TerminalContainer from './Terminal/TerminalContainer';
 import { Experiences } from './Experience';
 import Projects from './Projects';
 import useQuery from '../../util/useQuery';
-import Roogle from './Roogle';
 
 const Content = () => {
   const navigate = useNavigate();
@@ -18,7 +17,6 @@ const Content = () => {
     { Component: Home, label: 'Home', closable: false },
     { Component: Experiences, label: 'Experience', closable: false },
     { Component: Projects, label: 'Projects', closable: false },
-    { Component: Roogle, label: 'Roogle', closable: true },
   ]);
 
   useEffect(() => navigate(`?tab=${tab}`), [tab]);
