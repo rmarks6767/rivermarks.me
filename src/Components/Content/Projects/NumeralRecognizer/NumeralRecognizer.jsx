@@ -1,12 +1,11 @@
 import React from 'react';
 import ProjectPage from '../ProjectPage';
 
-const RiverMarksMe = () => (
+const NumeralRecognizer = () => (
   <ProjectPage
-    title="rivermarks.me"
-    github="https://github.com/rmarks6767/rivermarks.me"
-    website="https://rivermarks.me"
-    techStack={['React', 'NodeJS', 'Sass']}
+    title="Multi-Language Numeral Recognizer"
+    github="https://github.com/rmarks6767/csci-635"
+    techStack={['Python']}
     sections={[
       {
         key: 'tldr',
@@ -30,4 +29,4 @@ const RiverMarksMe = () => (
   />
 );
 
-export default RiverMarksMe;
+export default NumeralRecognizer;

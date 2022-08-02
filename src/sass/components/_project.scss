@@ -14,7 +14,6 @@
   background-color: $darker-gray;
 
   display: flex;
-  align-items: center;
   flex-direction: column;
 
   .project-picture {
@@ -25,11 +24,12 @@
       "x-large": 350px,
       "2x-large": 400px,
       "3x-large": 450px
-    ));
+    ), false);
     
-    padding: 10px;
-    border-radius: $rounded;
-    fill: $white;
+    width: 100%;
+    object-fit: cover;
+    border-top-left-radius: $rounded;
+    border-top-right-radius: $rounded;
   }
 
   .project-header {

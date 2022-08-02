@@ -65,7 +65,6 @@ const Projects = ({ setTab, setTabs }) => {
                 }
               }}
             >
-              {/* <LaunchIcon className="launch-icon" /> */}
               <img className="project-picture" alt={pictureAlt} src={Picture} />
               <CardContent>
                 <Typography

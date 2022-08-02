@@ -5,10 +5,11 @@ import TerminalContainer from './Terminal/TerminalContainer';
 import { Experiences } from './Experience';
 import Projects from './Projects';
 import useQuery from '../../util/useQuery';
+import Roogle from './Roogle';
 
 const Content = () => {
-  const query = useQuery();
   const navigate = useNavigate();
+  const query = useQuery();
 
   const [textAreaRef, setTextAreaRef] = useState();
   const [currentDirectory, setCurrentDirectory] = useState('~');
@@ -17,9 +18,9 @@ const Content = () => {
     { Component: Home, label: 'Home', closable: false },
     { Component: Experiences, label: 'Experience', closable: false },
     { Component: Projects, label: 'Projects', closable: false },
+    { Component: Roogle, label: 'Roogle', closable: true },
   ]);
 
-  // Used to update path so page stays up to date
   useEffect(() => navigate(`?tab=${tab}`), [tab]);
   useEffect(() => {
     if (textAreaRef) {

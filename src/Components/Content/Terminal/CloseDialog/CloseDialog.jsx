@@ -26,14 +26,18 @@ const CloseDialog = ({
     </DialogTitle>
     <DialogContent style={{ backgroundColor: '#444444' }}>
       <DialogContentText style={{ color: 'white' }} id="dialog-description">
-        There is still a process running in this tab. Closing the tab will kill it.
+        Don&apos;t worry, you can open this tab again from where you first found it
       </DialogContentText>
     </DialogContent>
     <DialogActions style={{ color: 'white', backgroundColor: '#444444' }}>
       <Button
-        disableRipple
-        style={{
+        variant="contained"
+        sx={{
           color: 'white',
+          backgroundColor: 'gray',
+          '&:hover': {
+            backgroundColor: '#666666',
+          },
         }}
         fullWidth
         onClick={handleClose}
@@ -41,7 +45,6 @@ const CloseDialog = ({
         Cancel
       </Button>
       <Button
-        disableRipple
         autoFocus
         fullWidth
         variant="contained"
