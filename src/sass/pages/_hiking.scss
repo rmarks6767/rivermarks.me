@@ -1,0 +1,41 @@
+.hiking {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+
+  .hiking-title {
+    @include text-size($headings, h0)
+  }
+
+  .hike {
+    color: $white;
+    background-color: $dark-gray;
+
+    .hike-stats {
+      .hike-square {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: $darker-gray;
+        border-radius: 5px;
+        height: 100%;
+      }
+  
+      .hike-image {
+        border-radius: 5px;
+        height: 200px;
+      }
+    }
+    
+  }
+
+  .small-text {
+    @include text-size($headings, h7);
+  }
+
+  .big-text {
+    @include text-size($headings, h3);
+  }
+}

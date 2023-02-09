@@ -5,6 +5,7 @@ import TerminalContainer from './Terminal/TerminalContainer';
 import { Experiences } from './Experience';
 import Projects from './Projects';
 import useQuery from '../../util/useQuery';
+// import Hiking from './Hiking';
 
 const Content = () => {
   const navigate = useNavigate();
@@ -17,6 +18,7 @@ const Content = () => {
     { Component: Home, label: 'Home', closable: false },
     { Component: Experiences, label: 'Experience', closable: false },
     { Component: Projects, label: 'Projects', closable: false },
+    // { Component: Hiking, label: 'Hiking', closable: true },
   ]);
 
   useEffect(() => navigate(`?tab=${tab}`), [tab]);
