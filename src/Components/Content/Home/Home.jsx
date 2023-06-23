@@ -36,7 +36,7 @@ const Home = ({ setTab }) => (
       <Button
         className="link"
         aria-label="resume"
-        href="https://github.com/rmarks6767/Resume/blob/master/RiverMarksResume.pdf"
+        href="https://rmarks6767.github.io/Resume/RiverMarksResume.pdf"
         target="_blank"
       >
         Resume
