@@ -1,0 +1,74 @@
+@use "sass:map";
+
+@mixin apply-breakpoint ($breakpoint) {
+  $max: map.get($breakpoints, $breakpoint, "max");
+  $min: map.get($breakpoints, $breakpoint, "min");
+
+  @media screen and (min-width: $min) and (max-width: $max) {
+    @content;
+  }
+};
+
+@mixin apply-breakpoints($property, $values) {  
+  @each $breakpoint, $_ in $breakpoints {
+    @include apply-breakpoint($breakpoint) {
+      #{$property}: map.get($values, $breakpoint);
+    }
+  }
+};
+
+@mixin text-size($sizes, $level: none) {  
+  font-family: $font-type;
+
+  @each $breakpoint, $_ in $breakpoints {
+    @include apply-breakpoint($breakpoint) {
+      @if($level == none) {
+        font-size: map.get($sizes, $breakpoint);
+      }
+      @else {
+        font-size: map.get($sizes, $level, $breakpoint);
+      }
+    }
+  }
+}
+
+@mixin image-size($sizes, $include-width: true) {  
+  @each $breakpoint, $size in $breakpoints {
+    @include apply-breakpoint($breakpoint) {
+      @if($include-width) {
+        width: map.get($sizes, $breakpoint);
+      }
+      height: map.get($sizes, $breakpoint);
+    }
+  }
+}
+
+@mixin image-height($sizes) {  
+  @each $breakpoint, $size in $breakpoints {
+    @include apply-breakpoint($breakpoint) {
+      height: map.get($sizes, $breakpoint);
+    }
+  }
+}
+
+@mixin scale($min-width, $scale) {
+  @media screen and (min-width: map.get($breakpoints, $min-width, "max"))  {
+    transition: transform 250ms;
+
+    &:hover {
+      cursor: pointer;
+      transform: scale($scale);
+      @content
+    }
+  }
+}
+
+@mixin flex($direction, $justify: center, $align: center) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+  flex-wrap: wrap;
+  flex-direction: $direction;
+  
+  @content;
+}
