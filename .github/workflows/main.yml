@@ -5,22 +5,29 @@ on:
     branches:
       - main
 
-permissions:
-  contents: write
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [16.x]
+
     steps:
-      - name: Checkout 🛎️
-        uses: actions/checkout@v3
-
-      - name: Install and Build 🔧 # This example project is built using npm and outputs the result to the 'build' folder. Replace with the commands required to build your project, or remove this step entirely if your site is pre-built.
-        run: |
-          npm ci
-          npm run build
-
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@v4
+      - uses: actions/checkout@v3
+        
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
         with:
-          folder: dist # The folder the action should deploy.
+          node-version: ${{ matrix.node-version }}
+
+      - name: Build
+        run: |
+          npm install
+          npx webpack
+
+      - name: Deploy to GH Page
+        uses: actions/deploy-pages@v2
+        with:
           branch: main
+          folder: dist
